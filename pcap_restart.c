@@ -157,11 +157,17 @@ int main(int argc, char *argv[])
                     printf("*\n");
                     printf("*\n");
 
-                    size_of_data = (ip->ip_len*4-size_ip-size_tcp);
+                    size_of_data = (ntohs(ip->ip_len)*4-size_ip-size_tcp);
+                    uint16_t start_of_data = (SIZE_ETHERNET + size_ip + size_tcp);
+                    printf("data size is : %d\n",size_of_data);
+                    printf("start of data is : %x \n", start_of_data);
                     payload = (u_char *)(packet + SIZE_ETHERNET + size_ip + size_tcp);	// actual data's location
-                    printf("data's size is : %u \n",size_of_data);
-		    printf("tcp : %u, ip: %u\n",size_tcp,size_ip);
-                    printf("this is data : %s", payload);
+                    for(int i=start_of_data; i <= size_of_data ; i++){
+                        printf(" %02x ",packet[i]);
+                        if(i%16 == 0){printf("\n");}
+                    }
+                    printf("\n");
+                    printf("this is data :\n %s", payload);
                 }//check tcp if statement's end
             }//check ip if statement's end
         }//check catch_ex statement's end
