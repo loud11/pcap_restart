@@ -136,8 +136,8 @@ int main(int argc, char *argv[])
                 printf("*\n");
                 printf("*\n");
                 printf("this is for ip header's info \n");
-                char src_ip[1024];
-                char dst_ip[1024];
+                char src_ip[INET_ADDRSTRLEN];
+                char dst_ip[INET_ADDRSTRLEN];
                 inet_ntop(AF_INET,&(ip->ip_src),src_ip,INET_ADDRSTRLEN);
                 inet_ntop(AF_INET,&(ip->ip_dst),dst_ip,INET_ADDRSTRLEN);
                 printf("source ip : %s \n", src_ip);
